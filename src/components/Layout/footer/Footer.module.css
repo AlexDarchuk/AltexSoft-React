@@ -1,0 +1,26 @@
+.footer {
+    width: 100%;
+    background: #351d08;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1170px;
+    padding: 10px 0;
+    margin: 0 auto;
+}
+.copirate {
+    display: flex;
+    align-items: center;
+}
+.copirateText {
+    color: white;
+    line-height: 0;
+    margin-left: 15px;
+}
+
+.author {
+    color: white;
+}

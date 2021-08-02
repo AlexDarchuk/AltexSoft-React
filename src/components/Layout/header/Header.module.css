@@ -1,0 +1,30 @@
+.header {
+    width: 100%;
+    background: #351d08;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.menuList {
+    padding: 10px 15px;
+}
+
+.menuLink {
+    font-weight: bold;
+    color:white;
+    opacity: 0.6;
+    text-decoration: none;
+}
