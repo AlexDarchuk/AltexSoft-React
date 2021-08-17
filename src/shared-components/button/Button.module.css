@@ -1,0 +1,66 @@
+.button {
+    display: flex;
+    align-items: center;
+    border: none;
+    font-family: 'Neucha', cursive;
+    background: none;
+    font-weight: bold;
+    border: 1px solid #ab570e;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ab570e;
+    cursor: pointer;
+}
+
+.button[data-btn-img='true'] {
+    width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.button[data-btn-name='true'] {
+    border: none;
+}
+
+.button[data-btn-more='true'] {
+    color: blue;
+    border: none;
+}
+
+.button[data-tegs-btn='true'] {
+
+    margin: 0px 5px 5px 0px;
+    border: 1px solid #ab570e;
+}
+
+.button[data-tegs-btn='true']:hover {
+    background: #ab570e;
+    color: #fff;
+}
+
+.button[data-show-tegs] {
+    border: none;
+    color: blue;
+}
+
+.button[data-log-in],
+.button[data-sign-up] {
+    justify-content: center;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #351d08;
+	color:white;
+	font-size:24px;
+	padding-top:22px;
+	padding-bottom:22px;
+	transition: all 0.3s;
+    margin-top: 10px;
+    font-weight:700;
+}
+
+.button[data-log-in]:hover,
+.button[data-sign-up]:hover {
+    background-color: #fff;
+	color: #351d08;
+}

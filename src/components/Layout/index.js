@@ -1,3 +1,3 @@
-export {default as Header} from './header';
-export {default as Footer} from './footer';
-export {default as Title} from './title';
+export * from './Layout';
+export * from './title';
+export * from './footer';

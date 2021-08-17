@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from './Footer.module.css';
 import Avatar from '../../../shared-components/avatar';
 
-const Footer = () => {
+export const Footer = () => {
     return (
-        <Router>
             <footer className={style.footer}>
                 <div className={style.container}>
                     <div className={style.copirate}>
@@ -21,8 +20,5 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-        </Router>
-    );
-};
-
-export default Footer;
+        );
+    };

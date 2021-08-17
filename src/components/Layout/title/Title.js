@@ -2,7 +2,7 @@ import React from 'react';
 import heroIcon from '../../../static/images/hero-icon.png';
 import style from './Title.module.css';
 
-const Title = () => {
+export const Title = () => {
     return (
         <div className={style.titleImage}>
             <div className={style.titleBlock}>
@@ -14,5 +14,3 @@ const Title = () => {
         </div>
     );
 };
-
-export default Title;

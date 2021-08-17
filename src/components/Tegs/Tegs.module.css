@@ -1,0 +1,19 @@
+.tegs {
+    width: 100%;
+    padding: 10px;
+    margin-left: 20px;
+    height: auto;
+    box-shadow: rgb(203 211 212 / 50%) 0px 2px 12px 0px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.tegBox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}

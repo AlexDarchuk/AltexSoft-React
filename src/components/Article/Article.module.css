@@ -1,0 +1,13 @@
+.article {
+    border: 1px solid rgb(201, 196, 196);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-weight: 500;
+    /* color: rgb(53, 64, 64); */
+    text-decoration: underline;
+}

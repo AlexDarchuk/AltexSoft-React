@@ -1,11 +1,13 @@
 import React from 'react';
-import fetchUsersData from '../../api/articles/articles';
+import {Title} from '../Layout';
+import { Main } from '../../pages';
+import style from './Body.module.css';
 
-const Body = (props) => {
-    fetchUsersData().then(respons => console.log(respons))
+export const Body = () => {
     return (
-        <h1>Hello</h1>
-    )
+        <main className={style.body}>
+            <Title/>
+            <Main/>
+        </main>
+    );
 };
-
-export default Body;

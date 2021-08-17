@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Avatar from '../../../shared-components/avatar';
 import style from './Header.module.css';
 
-const Header = (props) => {
+export const Header = () => {
     return (
-        <Router>
             <header className={style.header}>
                 <div className={style.container}>
                     <Link to='/'>
@@ -24,12 +23,14 @@ const Header = (props) => {
                                 </NavLink>
                             </li>
                             <li className={style.menuList}>
-                                <NavLink className={style.menuLink} to="login"
+                                <NavLink to="login"
                                     activeStyle={{
                                         fontWeight: "bold",
                                         textDecoration: 'none',
                                         color: "White"
-                                    }}>
+                                    }}
+                                    className={style.menuLink}
+                                    >
                                     Log in
                                 </NavLink>
                             </li>
@@ -48,8 +49,5 @@ const Header = (props) => {
                     </nav>
                 </div>
             </header>
-        </Router>
     );
 };
-
-export default Header;

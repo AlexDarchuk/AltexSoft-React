@@ -1,0 +1,29 @@
+.post {
+    padding: 20px;
+    width: 100%;
+    box-shadow: rgb(203 211 212 / 50%) 0px 2px 12px 0px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.userInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.created {
+    margin-left: 20px;
+}
+
+.listTegs {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+}
