@@ -6,3 +6,5 @@ export * from './TegList';
 export * from './Body';
 export * from './Layout';
 export * from './Post';
+export * from './DropDown';
+export * from './NewArticle';

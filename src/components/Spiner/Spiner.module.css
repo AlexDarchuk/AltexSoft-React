@@ -83,4 +83,13 @@
   .loaderContainer[data-teg='true'] {
     height: 150px;
   }
+
+  .loaderContainer[data-signup='true'],
+  .loaderContainer[data-log-in='true'] {
+    height: 85px;
+  }
+
+  .loaderContainer[data-new-article='true'] {
+    height: 60px;
+  }
   

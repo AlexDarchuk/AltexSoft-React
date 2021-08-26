@@ -28,3 +28,29 @@
     opacity: 0.6;
     text-decoration: none;
 }
+.link {
+    font-weight: normal;
+    text-decoration: none;
+    color: #828080;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+
+.loginBlock{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.userName {
+    margin-left: 5px;
+    color: #fff;
+}

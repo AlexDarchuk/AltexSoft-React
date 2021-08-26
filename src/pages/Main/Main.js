@@ -3,8 +3,10 @@ import { ToastContainer } from 'react-toastify';
 import { PostsList, TegList } from '../../components';
 import style from './Main.module.css';
 import { articlesService } from '../../api/articles';
+import { useAuth } from '../../hooks/useAuth';
 
 export const Main = () => {
+  const { isNewArticle } = useAuth();
   const [article, setArticle] = useState([]);
   const [tag, setTag] = useState([]);
   const [isLoading, setIsLoading] = useState(null);
@@ -13,12 +15,12 @@ export const Main = () => {
   const fetchArticles = async () => {
      try {
       setIsLoading(true)
-      const { articles, articlesCount } = await articlesService.getAllArticles();
-
-      console.log(articlesCount);
+      const { articles } = await articlesService.getAllArticles();
+      
       setArticle(articles);
      } catch(err) {
        console.error(err)
+       setIsLoading(false)
      } finally {
        setIsLoading(false)
      }
@@ -41,7 +43,7 @@ export const Main = () => {
     fetchArticles();
     fetchTegs();
     
-  },[])
+  },[isNewArticle])
   
     return (
         <div className={`${style.main} ${style.container}`}>

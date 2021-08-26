@@ -43,8 +43,16 @@
     color: blue;
 }
 
-.button[data-log-in],
-.button[data-sign-up] {
+.button[data-login-btn='true'] {
+    border-radius: 50px;
+    background: #d4d4d4;
+    padding: 7px;
+    border: rgb(61, 72, 73);
+}
+
+
+.button[data-log-in='true'],
+.button[data-sign-up='true'] {
     justify-content: center;
 	width: 100%;
 	border: #fbfbfb solid 4px;
@@ -59,8 +67,48 @@
     font-weight:700;
 }
 
+.button[data-create-article='true'] {
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    cursor:pointer;
+	background-color: #351d08;
+	color:#fff;
+    margin-top: 30px;
+}
+
+.button[data-drop-btn='true'] {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.button[data-drop-out-btn='true'] {
+    width: 100%;
+    display: block;
+    text-align: center;
+    border: none;
+    background: tomato;
+    color: #fff;
+}
+
+.button[data-drop-out-btn='true']:hover {
+    opacity: 0.7;
+}
+
+.button[data-drop-btn='true']:hover {
+    background: #ab570e;
+    color: #fff;
+}
+
 .button[data-log-in]:hover,
-.button[data-sign-up]:hover {
+.button[data-sign-up]:hover,
+.button[data-create-article='true']:hover {
     background-color: #fff;
 	color: #351d08;
+}
+
+.button[data-close-btn='true'] {
+    border: none;
+    margin: 0 0 0 auto;
 }

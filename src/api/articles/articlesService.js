@@ -3,30 +3,22 @@ import { AXIOS } from './axiosConfig';
 class ArticlesService {
     async getAllArticles() {
         try {
-            const {data}  = await AXIOS.get('/articles');
+            const {data}  = await AXIOS.get('/api/articles?limit=5');
             return data;
         } catch(err) {
             console.error(err);
         }
     }
-
-    // async getAllUsers() {
-    //     try {
-    //         const {data}  = await AXIOS.get('/users')
-    //         return data;
-    //     } catch(err) {
-    //         console.error(err);
-    //     }
-    // }
 
     async getAllTags() {
         try {
-            const { data } = await AXIOS.get('/tags')
+            const { data } = await AXIOS.get('api/tags')
             return data;
         } catch(err) {
             console.error(err);
         }
     }
+
 }
 
 export const articlesService = new ArticlesService();

@@ -1,10 +1,13 @@
 import axios from 'axios';
 
 export const AXIOS = axios.create({
-    baseURL: 'https://conduit.productionready.io/api'
+    baseURL: 'https://conduit.productionready.io'
 });
 
-// export const AXIOS = axios.create({
-//     baseURL: 'https://jsonplaceholder.typicode.com'
-// });
+export const AUTHINSTANS = axios.create({
+    baseURL: 'https://conduit.productionready.io',
+    headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`
+    }
+});
 

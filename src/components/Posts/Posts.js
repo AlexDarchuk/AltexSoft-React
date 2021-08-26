@@ -7,14 +7,14 @@ import { Article } from '..';
 import style from './Posts.module.css'
 import { PostTags } from '../PostTegs';
 import './Posts.css';
+import {useAuth} from '../../hooks/useAuth';
 
 
 
 export const Posts = ({ props } ) => {
     const {author: {image, username}, createdAt, title, description, favoritesCount, tagList} = props;
     const [countFavorites, setCountFavorites] = useState(favoritesCount);
- 
-    const isLogIn = false;
+    const { isSignIn } = useAuth();
 
     const infoToast = () => {
         toast("Authentication required. Please Login", {
@@ -45,7 +45,7 @@ export const Posts = ({ props } ) => {
                         </div>
                     </div>
                 </div>
-                <Button onClick={isLogIn ? countPlus : infoToast}>
+                <Button onClick={isSignIn ? countPlus : infoToast}>
                     <Icon name="heart" width={'14px'} color={'#ab570e'}/>
                     {countFavorites}
                 </Button>

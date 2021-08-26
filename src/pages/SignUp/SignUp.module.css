@@ -54,3 +54,7 @@
 .signUpLink:hover {
     text-decoration: underline;
 }
+
+.signUpSpiner {
+    height: 85px;
+}
