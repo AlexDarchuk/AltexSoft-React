@@ -1,46 +1,40 @@
 import React, { useState } from 'react';
 import style from './SignUp.module.css';
+import { Field , withFormik } from 'formik'
 import { Link } from "react-router-dom";
 import { Button } from '../../shared-components';
-import useFormFields from '../../hooks/useFormFields';
 import { createUser } from '../../api/articles';
 import { useAuth } from '../../hooks/useAuth';
 import { Spiner } from '../../components';
+import { SignUpShema} from '../../validationShemas';
+import { ErrorMessage } from '../../errors';
 
-export const SignUp = () => {
-   const { signIn, signOut, getToken, getDataUser, } = useAuth();
-   const [isSpinerBtn, setSpinerBtn ] = useState(false);
-   const { fields, changeFieldValue } = useFormFields({
-    username: '',
-    email: '',
-    password: '',
-   });
+const SignUp = ( props ) => {
+    const { values, isValid } = props;
+    const { signIn, signOut, getToken, getDataUser, } = useAuth();
+    const [isSpinerBtn, setSpinerBtn ] = useState(false);;
 
-   const handleSubmit = (e) => {
-       e.preventDefault();
-       create({
-        username: fields.username,
-        email: fields.email,
-        password: fields.password
-       });
-       setSpinerBtn(true)
-   }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        create( values );
+        setSpinerBtn(true)
+    }
 
-   const create = async (obj) => {
-       try {
-           const{ user } = await createUser(obj);
-           const { token } = user;
+    const create = async (obj) => {
+        try {
+            const{ user } = await createUser(obj);
+            const { token } = user;
 
-            signIn()
-            getToken(token)
-            getDataUser(user);
+                signIn()
+                getToken(token)
+                getDataUser(user);
+                setSpinerBtn(false)
+        } catch(err) {
+            console.error(err);
+            signOut()
             setSpinerBtn(false)
-       } catch(err) {
-           console.error(err);
-           signOut()
-           setSpinerBtn(false)
-       } 
-   }
+        } 
+    }
 
 
     return (
@@ -48,40 +42,36 @@ export const SignUp = () => {
             <div className={style.signUp}>
                 <h3 className={style.title}>Sign Up</h3>
                 <form className={style.form} onSubmit={handleSubmit}>
-                    <p className={style.input}>
-                        <input 
+                    <label className={style.input}>
+                        <Field 
                             name="username" 
                             type="text" 
                             className={style.feedbackInput} 
                             placeholder="Enter your username"
-                            value={fields.username}
-                            onChange={changeFieldValue}
-                            />
-                            
-                    </p>
-                    <p className={style.input}>
-                        <input 
+                        />
+                    </label>
+                    <ErrorMessage name="username"/>
+                    <label className={style.input}>
+                        <Field 
                             name="email" 
                             type="email" 
                             className={style.feedbackInput} 
                             placeholder="Enter email address"
-                            value={fields.email}
-                            onChange={changeFieldValue}
-                            />
-                    </p>
-                    <p className={style.input}>
-                        <input 
+                        />
+                    </label>
+                    <ErrorMessage name="email"/>
+                    <label className={style.input}>
+                        <Field 
                             name="password" 
                             type="password" 
                             className={style.feedbackInput} 
                             placeholder="Enter your password"
-                            value={fields.password}
-                            onChange={changeFieldValue}
-                            />
-                    </p>
+                        />
+                    </label>
+                    <ErrorMessage name="password"/>
                     <div>
                         {
-                            isSpinerBtn ? <Spiner signupSpiner/> : <Button type='submit' btnSignUp>Sign Up</Button>
+                            isSpinerBtn ? <Spiner signupSpiner/> : <Button type='submit' disabled={!isValid} btnSignUp={isValid}>Sign Up</Button>
                         }
                         
                     </div>
@@ -93,3 +83,12 @@ export const SignUp = () => {
         </div>
     );
 };
+
+export default withFormik({
+    validationSchema: SignUpShema,
+    mapPropsToValues: ({inatialValues}) => ({
+        username: "",
+        email: "",
+        password: ""
+    }),
+})(SignUp)

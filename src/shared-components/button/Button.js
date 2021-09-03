@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Button.module.css';
 
-export const Button = ( { children, type, dropDownBtn, btnCreateArticle, btnClose, dropDownBtnOut, logInBtn, onClick, btnImg, btnTegs, btnShowTeg, btnLogIn, btnSignUp, btnName, btmMore}) => {
+export const Button = ( { children, disabled, type, dropDownBtn, btnCreateArticle, btnEditProfile, btnClose, dropDownBtnOut, logInBtn, onClick, btnImg, btnTegs, btnShowTeg, btnLogIn, btnSignUp, btnName, btmMore}) => {
 
     return (
         <>
@@ -18,8 +18,10 @@ export const Button = ( { children, type, dropDownBtn, btnCreateArticle, btnClos
             data-drop-out-btn={dropDownBtnOut}
             data-create-article={btnCreateArticle}
             data-close-btn={btnClose}
+            data-edit-profile={btnEditProfile}
             onClick={ onClick }
             className={ style.button } 
+            disabled={disabled}
             type={ type }>
                 { children } 
             </button>

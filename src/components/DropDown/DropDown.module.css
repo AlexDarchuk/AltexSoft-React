@@ -23,3 +23,13 @@
 .hide{
     display: none;
 }
+
+.profileLink {
+    color: #ab570e;
+    text-decoration: none;
+    padding: 5px 60px;
+}
+
+.profileLink:hover {
+    color: #fff;
+}

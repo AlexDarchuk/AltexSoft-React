@@ -33,7 +33,13 @@
     border: 1px solid #ab570e;
 }
 
-.button[data-tegs-btn='true']:hover {
+.button[data-edit-profile='true'] {
+    margin-right: 10px;
+    justify-content: center;
+}
+
+.button[data-tegs-btn='true']:hover,
+.button[data-edit-profile='true']:hover {
     background: #ab570e;
     color: #fff;
 }
@@ -44,12 +50,14 @@
 }
 
 .button[data-login-btn='true'] {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
     border-radius: 50px;
     background: #d4d4d4;
-    padding: 7px;
+    padding: 0px;
     border: rgb(61, 72, 73);
 }
-
 
 .button[data-log-in='true'],
 .button[data-sign-up='true'] {
@@ -67,6 +75,33 @@
     font-weight:700;
 }
 
+.button[data-log-in='false'],
+.button[data-sign-up='false'] {
+    justify-content: center;
+	width: 100%;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	color:#fff;
+	font-size:24px;
+	padding-top:22px;
+	padding-bottom:22px;
+	transition: all 0.3s;
+    margin-top: 10px;
+    font-weight:700;
+    background-color:rgb(245, 50, 50)
+}
+
+.button[data-create-article="false"] {
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    cursor:pointer;
+	background-color: rgb(245, 50, 50);
+	color:#fff;
+    margin-top: 30px;
+}
+
+
 .button[data-create-article='true'] {
     justify-content: center;
     width: 100%;
@@ -76,6 +111,8 @@
 	color:#fff;
     margin-top: 30px;
 }
+
+
 
 .button[data-drop-btn='true'] {
     width: 100%;
@@ -106,6 +143,12 @@
 .button[data-create-article='true']:hover {
     background-color: #fff;
 	color: #351d08;
+}
+.button[data-log-in='false']:hover,
+.button[data-sign-up='false']:hover,
+.button[data-create-article="false"]:hover {
+    background-color:rgb(245, 50, 50);
+    color:#fff;
 }
 
 .button[data-close-btn='true'] {

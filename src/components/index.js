@@ -8,3 +8,6 @@ export * from './Layout';
 export * from './Post';
 export * from './DropDown';
 export * from './NewArticle';
+export * from './EditUser';
+export * from './Posts';
+export * from './Pagination';

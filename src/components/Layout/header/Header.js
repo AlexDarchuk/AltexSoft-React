@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import { Link, NavLink, Redirect } from "react-router-dom";
 import Avatar from '../../../shared-components/avatar';
 import style from './Header.module.css';
-import { Icon, Button } from '../../../shared-components';
+import { Icon, Button, Image } from '../../../shared-components';
 import { useAuth } from '../../../hooks/useAuth';
 import { DropDown } from '../../DropDown';
 
 export const Header = () => {
     const { isSignIn, dataUser } = useAuth();
     const [isShowDropDown, setShowDropDown] = useState(false);
-
 
     const showDropDown = () => {
         setShowDropDown(!isShowDropDown);
@@ -36,7 +35,10 @@ export const Header = () => {
                                         <>
                                         <li className={style.loginBlock}>
                                             <Button onClick={showDropDown} logInBtn>
-                                                <Icon name="user" width={'17px'} color={'rgb(61, 72, 73)'}/>
+                                                {
+                                                    dataUser.image ? <Image src={dataUser.image}/> : <Icon name="user" width={'17px'} color={'rgb(61, 72, 73)'}/>
+                                                }
+                                                
                                             </Button>
                                             <DropDown dropDownShow={isShowDropDown}/>
                                             <span className={style.userName}>{dataUser.username} </span>

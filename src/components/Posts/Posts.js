@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
-import { Icon, Image, Button } from '../../shared-components';
+import { Icon, Image, Button, infoToast } from '../../shared-components';
 import { Article } from '..';
+import { profileUser } from '../../api/articles';
 import style from './Posts.module.css'
 import { PostTags } from '../PostTegs';
-import './Posts.css';
-import {useAuth} from '../../hooks/useAuth';
-
-
+import {useAuth, useDataArticle} from '../../hooks';
+ 
 
 export const Posts = ({ props } ) => {
-    const {author: {image, username}, createdAt, title, description, favoritesCount, tagList} = props;
+    const {author: {image, username}, createdAt, title, slug, description, favoritesCount, tagList} = props;
     const [countFavorites, setCountFavorites] = useState(favoritesCount);
-    const { isSignIn } = useAuth();
+    const { isSignIn, getDataProfileUser } = useAuth();
+    const history = useHistory();
+    const { getArticleFavorite, getArticleUser} = useDataArticle();
 
-    const infoToast = () => {
-        toast("Authentication required. Please Login", {
-            className: 'test-toast',
-            autoClose: 7000,
-            hideProgressBar: false,
-            position: toast.POSITION.TOP_RIGHT
-        });
-    }
     
     const countPlus = () => {
         setCountFavorites(countFavorites + 1)
+    }
+
+    const getProfileUser = async (name) => {
+        try{
+            const { profile } = await profileUser(name);
+
+            getDataProfileUser(profile);
+        } catch(err) {
+            console.error(err);
+        }
+    }
+    const handlName = (e) => {
+        let name = e.target.innerText;
+        getProfileUser(name);
+        getArticleUser(name);
+        getArticleFavorite(name);
+        history.push(`/profiles/${name}`);
     }
 
     return (
@@ -37,7 +46,7 @@ export const Posts = ({ props } ) => {
                         <Image src={image}/>
                     </Button>
                     <div className={style.created}>
-                        <Button btnName >
+                        <Button dataSlug={slug} btnName onClick={handlName}>
                             {username}
                         </Button>
                         <div className={style.time}>

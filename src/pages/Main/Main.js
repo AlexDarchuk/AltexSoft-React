@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { ToastContainer } from 'react-toastify';
-import { PostsList, TegList } from '../../components';
+import { PostsList, TegList, Pagination } from '../../components';
 import style from './Main.module.css';
 import { articlesService } from '../../api/articles';
 import { useAuth } from '../../hooks/useAuth';
+import { usePagination } from '../../hooks/usePagination';
 
 export const Main = () => {
   const { isNewArticle } = useAuth();
@@ -11,6 +12,7 @@ export const Main = () => {
   const [tag, setTag] = useState([]);
   const [isLoading, setIsLoading] = useState(null);
   const [isLoadingTeg, setIsLoadingTeg] = useState(null);
+  const {getCurrentPosts, setPage} = usePagination();
 
   const fetchArticles = async () => {
      try {
@@ -46,10 +48,13 @@ export const Main = () => {
   },[isNewArticle])
   
     return (
+      <>
         <div className={`${style.main} ${style.container}`}>
-          <PostsList items = {article} isLoading={isLoading}/>
+          <PostsList items = {getCurrentPosts(article)} articlesCount={article} isLoading={isLoading}/>
           <TegList items = {tag} isLoading={isLoadingTeg}/>
           <ToastContainer/>
         </div>
+        <Pagination articles={article} setPage={setPage}/>
+       </> 
     )
 };

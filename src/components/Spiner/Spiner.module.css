@@ -92,4 +92,10 @@
   .loaderContainer[data-new-article='true'] {
     height: 60px;
   }
+
+  .loaderContainer[data-profile='true'] {
+    width: 100%;
+    height: 200px;
+    margin-top: 20px;
+  }
   

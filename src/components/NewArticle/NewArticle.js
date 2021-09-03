@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import style from './NewArticle.module.css';
-import useFormFields from '../../hooks/useFormFields';
+import { Field , withFormik} from 'formik';
 import { createArticle } from '../../api/articles';
 import { Icon, Button } from '../../shared-components';
 import { Spiner } from '../../components';
 import { useAuth } from '../../hooks/useAuth';
+import { NewArticleShema} from '../../validationShemas';
 
-export const NewArticle = () => {
+const NewArticle = ( props ) => {
+    const { values, isValid } = props;
     const { newArticle } = useAuth();
     const [isSpinerBtn, setSpinerBtn ] = useState(false);
-    const { fields, changeFieldValue } = useFormFields({
-        title: '',
-        description: '',
-        body: '',
-        tagList: ''
-       });
 
+    console.log(values);
     const handleSubmit = (e) => {
     e.preventDefault();
         createNewArticle({
-            title: fields.title,
-            description: fields.description,
-            body: fields.body,
-            tagList: fields.tagList.split(' ')
+            title: values.title,
+            description: values.description,
+            body: values.body,
+            tagList: values.tagList.split(' ')
         });
         setSpinerBtn(true);
     }
@@ -54,54 +51,46 @@ export const NewArticle = () => {
                 </Button>
                 <h3 className={style.title}>New Article</h3>
                 <form className={style.form} onSubmit={handleSubmit}>
-                    <p className={style.input}>
+                    <label className={style.input}>
                         Article title
-                        <input 
+                        <Field 
                             name="title" 
                             type="text" 
                             className={style.articleInput} 
                             placeholder="Article title"
-                            value={fields.title}
-                            onChange={changeFieldValue}
                         />   
-                    </p>
-                    <p className={style.input}>
+                    </label>
+                    <label className={style.input}>
                         Description
-                        <input 
+                        <Field 
                             name="description" 
                             type="text" 
                             className={style.articleInput} 
                             placeholder="What's your article about?"
-                            value={fields.description}
-                            onChange={changeFieldValue}
                         />
-                    </p>
-                    <p className={style.input}>
+                    </label>
+                    <label className={style.input}>
                         Write your article
-                        <textarea 
+                        <Field as ="textarea" 
                             name="body" 
                             type="text" 
                             className={style.articleTextArea} 
                             placeholder="Articles"
-                            value={fields.password}
-                            onChange={changeFieldValue}
                         >
-                        </textarea>
-                    </p>
-                    <p className={style.input}>
+                        </Field>
+                    </label>
+                    <label className={style.input}>
                         Enter tags
-                        <input 
+                        <Field 
                             name="tagList" 
                             type="text" 
                             className={style.articleInput} 
                             placeholder="Enter tags"
-                            value={fields.tegs}
-                            onChange={changeFieldValue}
                         />
-                    </p>
+                    </label>
                     <div>
                         {
-                            isSpinerBtn ? <Spiner newArticleSpiner/> : <Button type='submit' btnCreateArticle>Publish Article</Button>
+                            isSpinerBtn ? <Spiner newArticleSpiner/> : <Button type='submit' disabled={!isValid} btnCreateArticle={isValid}>Publish Article</Button>
                         }
                     </div>
                 </form>
@@ -109,3 +98,13 @@ export const NewArticle = () => {
         </div>
     );
 };
+
+export default withFormik({
+    validationSchema: NewArticleShema,
+    mapPropsToValues: () => ({
+        title: '',
+        description: '',
+        body: '',
+        tagList: ''
+    }),
+})(NewArticle)
