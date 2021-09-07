@@ -1,13 +1,24 @@
-export * from './Tegs';
-export * from './Spiner';
-export * from './PostsList';
-export * from './Article';
-export * from './TegList';
-export * from './Body';
+export * from './AddComment/AddComment';
+export * from './Article/Article';
+export * from './Body/Body';
+export * from './DropDown/DropDown';
+export * from './EditUser/EditUser';
 export * from './Layout';
-export * from './Post';
-export * from './DropDown';
-export * from './NewArticle';
-export * from './EditUser';
-export * from './Posts';
-export * from './Pagination';
+export * from './NewArticle/NewArticle';
+export * from './NewComment/NewComment';
+export * from './Pagination/Pagination';
+export * from './Posts/Posts';
+export * from './Spiner/Spiner';
+export * from './TegList/TagList';
+export * from './Tegs/Tegs';
+
+
+
+
+
+
+
+
+
+
+

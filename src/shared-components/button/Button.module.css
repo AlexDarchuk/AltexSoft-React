@@ -29,13 +29,14 @@
 
 .button[data-tegs-btn='true'] {
 
-    margin: 0px 5px 5px 0px;
+    margin: 0px 10px 10px 0px;
     border: 1px solid #ab570e;
 }
 
 .button[data-edit-profile='true'] {
     margin-right: 10px;
     justify-content: center;
+    padding: 5px 30px;
 }
 
 .button[data-tegs-btn='true']:hover,
@@ -133,7 +134,10 @@
     opacity: 0.7;
 }
 
-.button[data-drop-btn='true']:hover {
+
+
+.button[data-drop-btn='true']:hover,
+.button[data-comment-btn='true']:hover {
     background: #ab570e;
     color: #fff;
 }
@@ -155,3 +159,31 @@
     border: none;
     margin: 0 0 0 auto;
 }
+
+.button[data-comment-btn='true'] {
+    width: max-content;
+    margin: 20px 0 20px auto; 
+}
+
+.button[data-comment-btn='false'] {
+    background-color:rgb(245, 50, 50);
+    color:#fff;
+    width: max-content;
+    margin: 20px 0 20px auto; 
+}
+
+.button[data-delete-comment='true'] {
+    background-color:rgb(245, 50, 50);
+    color:#fff;
+}
+
+.button[data-edit-article='true'] {
+    margin-right: 5px;
+    background-color: #fff;
+    color: #ab570e;
+}
+.button[data-edit-article='true']:hover {
+    color: #fff;
+    background-color: #ab570e;
+}
+

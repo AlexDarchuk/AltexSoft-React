@@ -2,7 +2,7 @@ import { articlesService } from '../api/articles';
 import { useAuth } from './useAuth';
 
 export const useDataArticle = () => {
-    const { getDataArticleUser, getDataFavoriteArticle, getListTags } = useAuth();
+    const { getDataArticleUser, getDataFavoriteArticle, getListTags, getDataSingleArticle, changeValueComment,deleteArticleFlag } = useAuth();
 
     const getArticleUser = async (name) => {
         try {
@@ -13,6 +13,7 @@ export const useDataArticle = () => {
             console.error(err);
         }
     }
+    
 
     const getArticleFavorite = async (name) => {
         try {
@@ -21,6 +22,61 @@ export const useDataArticle = () => {
             getDataFavoriteArticle(articles)
         } catch(err) {
             console.error(err)
+        }
+    }
+
+    const getDeleteArticle = async ( slug ) => {
+        try {
+            await articlesService.deleteArticle(slug);
+
+            deleteArticleFlag(true);
+        }catch(err) {
+            console.error(err);
+            deleteArticleFlag(false);
+        }finally {
+            deleteArticleFlag(false);
+        }
+    }
+
+    const getUpdateArticle = async (slug, obj) => {
+        try {
+            const { article } = await articlesService.updateArticle(slug, obj);
+
+            getDataSingleArticle(article);
+        }catch(err) {
+            console.error(err);
+        }
+    }
+
+    const getFavoriteArticle = async (slug) => {
+        try {
+           await articlesService.favoriteArticle(slug);
+
+        }catch(err) {
+            console.error(err);
+        }
+    }
+
+    const getOneArticle = async (slug) => {
+        try {
+            const { article } = await articlesService.getSingleArticle(slug);
+
+            getDataSingleArticle(article);
+        } catch(err) {
+            console.error(err)
+        }
+    }
+
+    const createArticleComment = async (slug, commentObj) => {
+        try {
+             await articlesService.createComment(slug, commentObj);
+
+             changeValueComment(true);
+        } catch(err) {
+            console.error(err);
+            changeValueComment(false);
+        }finally {
+            changeValueComment(false);
         }
     }
 
@@ -34,6 +90,6 @@ export const useDataArticle = () => {
         }
     }
 
-    return {getArticleUser, getArticleFavorite, getTagsList}
+    return { getUpdateArticle, getArticleUser, getArticleFavorite, getTagsList, getFavoriteArticle, getOneArticle, createArticleComment, getDeleteArticle}
     
 }

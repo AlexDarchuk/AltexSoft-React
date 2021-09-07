@@ -11,7 +11,7 @@ import { ErrorMessage } from '../../errors';
 
 const SignUp = ( props ) => {
     const { values, isValid } = props;
-    const { signIn, signOut, getToken, getDataUser, } = useAuth();
+    const { signIn, signOut, getDataUser, } = useAuth();
     const [isSpinerBtn, setSpinerBtn ] = useState(false);;
 
     const handleSubmit = (e) => {
@@ -23,12 +23,10 @@ const SignUp = ( props ) => {
     const create = async (obj) => {
         try {
             const{ user } = await createUser(obj);
-            const { token } = user;
 
-                signIn()
-                getToken(token)
-                getDataUser(user);
-                setSpinerBtn(false)
+            signIn();
+            getDataUser(user);
+            setSpinerBtn(false)
         } catch(err) {
             console.error(err);
             signOut()

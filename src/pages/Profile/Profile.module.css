@@ -1,7 +1,7 @@
 .profile {
     width: 1170px;
     margin: 0px auto;
-    height: 100%;
+    flex: 1;
 }
 
 .profileBox {

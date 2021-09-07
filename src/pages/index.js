@@ -1,5 +1,6 @@
-export * from './Main';
-export * from './LogIn';
-export * from './SignUp';
-export * from './Profile';
-export * from './Profiles';
+export * from './Articles/Articles';
+export * from './LogIn/LogIn';
+export * from './Profile/Profile';
+export * from './Profiles/Profiles';
+export * from './SignUp/SignUp';
+

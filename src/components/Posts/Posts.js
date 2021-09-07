@@ -1,41 +1,39 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns'
 import { useHistory } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 import { Icon, Image, Button, infoToast } from '../../shared-components';
-import { Article } from '..';
-import { profileUser } from '../../api/articles';
 import style from './Posts.module.css'
-import { PostTags } from '../PostTegs';
-import {useAuth, useDataArticle} from '../../hooks';
+import {useAuth, useDataArticle, useDataUser} from '../../hooks';
  
 
 export const Posts = ({ props } ) => {
     const {author: {image, username}, createdAt, title, slug, description, favoritesCount, tagList} = props;
     const [countFavorites, setCountFavorites] = useState(favoritesCount);
-    const { isSignIn, getDataProfileUser } = useAuth();
+    const { isSignIn, getSlugListComments, getUserName } = useAuth();
     const history = useHistory();
-    const { getArticleFavorite, getArticleUser} = useDataArticle();
+    const { getArticleFavorite, getArticleUser, getFavoriteArticle, getOneArticle} = useDataArticle();
+    const { getProfileUser } = useDataUser();
 
     
-    const countPlus = () => {
+    const countPlus = (slug) => {
         setCountFavorites(countFavorites + 1)
+        getFavoriteArticle(slug);
     }
 
-    const getProfileUser = async (name) => {
-        try{
-            const { profile } = await profileUser(name);
-
-            getDataProfileUser(profile);
-        } catch(err) {
-            console.error(err);
-        }
-    }
     const handlName = (e) => {
         let name = e.target.innerText;
         getProfileUser(name);
         getArticleUser(name);
         getArticleFavorite(name);
+        getUserName(name)
         history.push(`/profiles/${name}`);
+    }
+
+    const moreAboutArticles = (slug) => {
+        history.push(`/articles`);
+        getOneArticle(slug);
+        getSlugListComments(slug);
     }
 
     return (
@@ -50,21 +48,24 @@ export const Posts = ({ props } ) => {
                             {username}
                         </Button>
                         <div className={style.time}>
-                            {createdAt}
+                        {format(new Date(createdAt),'MMMM dd. yyyy HH:m')}
                         </div>
                     </div>
                 </div>
-                <Button onClick={isSignIn ? countPlus : infoToast}>
+                <Button onClick={() => isSignIn ? countPlus(slug) : infoToast()}>
                     <Icon name="heart" width={'14px'} color={'#ab570e'}/>
                     {countFavorites}
                 </Button>
                 
             </div>
-                <Article title={title} description={description}/>
+            <div className={style.article}>
+                <h4 className={style.title}>{title}</h4>
+                <p className={style.text}>{description}</p>
+            </div>
             <ul className={style.listTegs}>
-                {tagList.map(teg => <PostTags key={uuidv4()} teg={teg}/>)}
+                {tagList.map(teg => <li key={uuidv4()} className={style.tegsItem}>#{teg}&nbsp;</li> )}
             </ul>
-            <Button btmMore>
+            <Button btmMore onClick={() => moreAboutArticles(slug)}>
                 Read more...
             </Button>
         </div>

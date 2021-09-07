@@ -4,15 +4,24 @@ export const useAuthProvider = () => {
     const [ isSignIn, setSignIn ] = useState(false);
     const [ isNewArticle, setNewArticle] = useState(false);
     const [ isUpdateUser, setUpdateUser] = useState(true);
-    const [ isToken, setToken ] = useState(localStorage.getItem('token'));
     const [dataUser, setDataUser] = useState([]);
     const [dataProfile, setDataProfile] = useState([]);
     const [dataOneArticle, setDataOneArticle] = useState([]);
     const [dataFavoriteArticle, setDataFavoriteArticle] = useState([]);
     const [dataFollowUser, setDataFollowUser] = useState([]);
     const [tagsList, setTagsList] = useState([]);
+    const [oneArticle, setOneArticle] = useState([])
     const [followNameUser, setFollowNameUser] = useState('');
     const [unFollowNameUser, setUnFollowNameUser] = useState('');
+    const [slugListComments, setSlugListComments] = useState('');
+    const [userName, setUserName] = useState('');
+    const [nameModalNewAticle, setNameModalNewArticle] = useState('');
+    const [followingUser, setFollowingUser] = useState(null);
+    const [createdNewComment, setCreatedNewComment] = useState(false);
+    const [isDeleteArticle, setIsDeleteArticle] = useState(false);
+    const [nameAndCountTag, setNameAndCountTAg] = useState({name: '', indexTag: null});
+    
+    
 
     const signIn = () => {
         setSignIn(true);
@@ -30,6 +39,36 @@ export const useAuthProvider = () => {
         setUpdateUser(point);
     }
 
+    const getNameAndCountTag = ( tag, number) => {
+        setNameAndCountTAg({
+            name: tag,
+            indexTag: number
+        });
+    }
+
+    const changeValueComment = (point) => {
+        setCreatedNewComment(point)
+    }
+    const deleteArticleFlag = (point) => {
+        setIsDeleteArticle(point);
+    }
+
+    const getNameModalNewArticle = (title) => {
+        setNameModalNewArticle(title);
+    }
+
+    const getSlugListComments =(slug) => {
+        setSlugListComments(slug)
+    }
+
+    const changeFollowingBtn = (followingUser) => {
+        setFollowingUser(followingUser)
+    }
+
+    const getDataSingleArticle = (article) => {
+        setOneArticle(article);
+    }
+
     const getFollowUserName = (username) => {
         setFollowNameUser(username);
     }
@@ -42,16 +81,16 @@ export const useAuthProvider = () => {
         setTagsList(articles)
     }
 
-    const getToken = (token) => {
-        setToken(token);
-    }
-
     const getUserFollow = (user) => {
         setDataFollowUser(user);
     }
 
     const getDataUser = (user) => {
         setDataUser(user);
+    }
+
+    const getUserName =(name) => {
+        setUserName(name);
     }
 
 
@@ -67,7 +106,14 @@ export const useAuthProvider = () => {
         setDataFavoriteArticle(article)
     }
 
-    localStorage.setItem('token', isToken);
+    const { token } = dataUser;
+
+    if ( token !== undefined) {
+        sessionStorage.setItem('token', token);
+    } else {
+        sessionStorage.removeItem('token')
+    }
+    
 
     return {
         isSignIn,
@@ -77,7 +123,6 @@ export const useAuthProvider = () => {
         signIn,
         newArticle,
         signOut,
-        getToken,
         getDataUser,
         dataUser,
         dataProfile,
@@ -85,11 +130,29 @@ export const useAuthProvider = () => {
         getDataArticleUser,
         dataOneArticle,
 
+        getSlugListComments,
+        slugListComments,
+
+        deleteArticleFlag,
+        isDeleteArticle,
+
+        getNameModalNewArticle,
+        nameModalNewAticle,
+
+        getUserName,
+        userName,
+        
         getDataFavoriteArticle,
         dataFavoriteArticle,
 
         getUserFollow,
         dataFollowUser,
+
+        oneArticle,
+        getDataSingleArticle,
+
+        changeFollowingBtn,
+        followingUser,
 
         getFollowUserName,
         followNameUser,
@@ -97,6 +160,13 @@ export const useAuthProvider = () => {
         getUnFollowUserName,
         unFollowNameUser,
         getListTags,
-        tagsList
+        tagsList,
+
+        getNameAndCountTag,
+        nameAndCountTag,
+         
+        changeValueComment,
+        createdNewComment
+
     }
 }

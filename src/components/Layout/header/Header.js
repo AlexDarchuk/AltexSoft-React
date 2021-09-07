@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import { Link, NavLink, Redirect } from "react-router-dom";
-import Avatar from '../../../shared-components/avatar';
+import {Logo} from '../../../shared-components';
 import style from './Header.module.css';
 import { Icon, Button, Image } from '../../../shared-components';
 import { useAuth } from '../../../hooks/useAuth';
-import { DropDown } from '../../DropDown';
+import { DropDown } from '../../';
+import NewArticle from '../../NewArticle/NewArticle';
 
 export const Header = () => {
-    const { isSignIn, dataUser } = useAuth();
+    const { isSignIn, dataUser, isNewArticle } = useAuth();
     const [isShowDropDown, setShowDropDown] = useState(false);
 
     const showDropDown = () => {
@@ -18,7 +19,7 @@ export const Header = () => {
             <header className={style.header}>
                 <div className={style.container}>
                     <Link to='/'>
-                        <Avatar height={"40px"}/>
+                        <Logo height={"40px"}/>
                     </Link>
                     <nav className={style.navMenu}>
                         <ul className={style.menu}>
@@ -49,7 +50,7 @@ export const Header = () => {
                                       :
                                       <>
                                             <li className={style.menuList}>
-                                                <NavLink to="login"
+                                                <NavLink exact to="login"
                                                     className={style.link}
                                                     activeClassName={style.active}
                                                     >
@@ -68,6 +69,11 @@ export const Header = () => {
                         </ul>
                     </nav>
                 </div>
+                <>
+                {
+                isNewArticle ? <Redirect to='/'/> : <NewArticle/>
+                }
+                </>
             </header>
     );
 };

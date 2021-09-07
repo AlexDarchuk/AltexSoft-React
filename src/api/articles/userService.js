@@ -1,4 +1,5 @@
-import { AUTHINSTANS } from './axiosConfig';
+import {AXIOS, AUTHINSTANS } from './axiosConfig';
+let AXIOSCONF = (sessionStorage.getItem("token")) ? AUTHINSTANS : AXIOS;
 
 export const createUser = async (user) => {
     try {
@@ -14,7 +15,7 @@ export const createUser = async (user) => {
 
 export const logInUser = async (user) => {
     try {
-        const { data } = await AUTHINSTANS.post('/api/users/login', {
+        const { data } = await AXIOSCONF.post('/api/users/login', {
             user
         });
         
@@ -50,7 +51,6 @@ export const followUser = async (username) => {
     try {
         const { data } = await AUTHINSTANS.post(`/api/profiles/${username}/follow`);
 
-        console.log(data);
         return data;
     } catch(err) {
         console.error(err);
@@ -61,7 +61,6 @@ export const unFollowUser = async (username) => {
     try {
         const { data } = await AUTHINSTANS.delete(`/api/profiles/${username}/follow`);
 
-        console.log(data);
         return data;
     } catch(err) {
         console.error(err);
@@ -75,12 +74,12 @@ export const createArticle = async (article) => {
             article
         });
 
-        
         return data;
     } catch(err) {
         console.error(err);
     }
 }
+
 
 
 

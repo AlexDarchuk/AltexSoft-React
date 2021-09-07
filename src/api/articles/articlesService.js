@@ -1,4 +1,4 @@
-import { AXIOS } from './axiosConfig';
+import { AXIOS, AUTHINSTANS, } from './axiosConfig';
 
 class ArticlesService {
     async getAllArticles() {
@@ -20,6 +20,27 @@ class ArticlesService {
         }
     }
 
+    async favoriteArticle(slug) {
+        try {
+            const {data} = await AUTHINSTANS.post(`/api/articles/${slug}/favorite`);
+
+            return data;
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    async getSingleArticle(slug) {
+        try {
+            const { data } = await AXIOS.get(`/api/articles/${slug}`);
+
+            console.log(data);
+            return data;
+        }catch(err) {
+            console.error(err)
+        }
+    }
+
     async articleUser(name) {
         try {
             const {data} = await AXIOS.get(`/api/articles?author=${name}`);
@@ -30,11 +51,42 @@ class ArticlesService {
         }
     }
 
+    async deleteArticle(slug) {
+        try {
+            const { data } = await AUTHINSTANS.delete(`/api/articles/${slug}`);
+
+            return data;
+        }catch(err) {
+            console.error(err);
+        }
+    }
+
+    async updateArticle(slug, article) {
+        try {
+            const { data } = await AUTHINSTANS.put(`/api/articles/${slug}`, {
+                article
+            });
+
+            return data;
+        }catch(err) {
+            console.error(err);
+        }
+    }
+
     async articleFavorite(name) {
         try {
             const {data} = await AXIOS.get(`/api/articles?favorited=${name}`);
 
-            console.log(data);
+            return data;
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    async myFeedArticle(feedCount) {
+        try {
+            const {data}  = await AUTHINSTANS.get(`/api/articles/feed?limit=${feedCount}`);
+            
             return data;
         } catch(err) {
             console.error(err);
@@ -43,25 +95,36 @@ class ArticlesService {
 
     async listTags(tag) {
         try {
-            const {data} = await AXIOS.get(`/api/articles?tag=${tag}`);
+            const {data} = await AXIOS.get(`/api/articles?tag=${tag}&limit=200`);
 
-            console.log(data);
             return data;
         } catch(err) {
             console.error(err);
         }
     }
 
+    async createComment(slug, comment) {
+        try {
+            const { data } = await AUTHINSTANS.post(`/api/articles/${slug}/comments`, {
+                comment
+            })
+
+            return data;
+        } catch(err) {
+            console.error(err)
+        }
+    }
+
+    async listOfComments(slug) {
+        try {
+            const { data } = await AXIOS.get(`/api/articles/${slug}/comments`)
+
+            return data;
+        } catch(err) {
+            console.error(err)
+        }
+    }
+
 }
 
 export const articlesService = new ArticlesService();
-
-// export const getRequest = async () => {
-//     try {
-//         const { data } = await AXIOS.get('https://conduit.productionready.io/api/articles');
-//         console.log(data);
-//         return data;
-//     } catch (err) {
-//         console.error(err);
-//     }
-// };

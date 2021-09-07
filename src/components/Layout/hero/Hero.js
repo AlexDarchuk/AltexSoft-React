@@ -1,8 +1,8 @@
 import React from 'react';
 import heroIcon from '../../../static/images/hero-icon.png';
-import style from './Title.module.css';
+import style from './Hero.module.css';
 
-export const Title = () => {
+export const Hero = () => {
     return (
         <div className={style.titleImage}>
             <div className={style.titleBlock}>

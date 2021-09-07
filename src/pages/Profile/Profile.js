@@ -1,26 +1,30 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { v4 as uuidv4 } from 'uuid';
 import style from './Profile.module.css';
 import defaulLogo from '../../static/images/smiley-cyrus.jpg';
 import { Image, Button } from '../../shared-components';
-import { Spiner, Posts } from '../../components';
-import { useAuth } from '../../hooks/useAuth';
-import { useDataUser } from '../../hooks';
+import EditUser from '../../components/EditUser/EditUser';
+import { Spiner, Posts, Pagination } from '../../components';
+import { useAuth, usePagination } from '../../hooks';
 
 export const Profile = () => {
     const { dataUser, isUpdateUser,dataOneArticle, dataFavoriteArticle } = useAuth();
-    const { username, image, bio, } = dataUser;
-    // const { getFollowUser, getUnFollowUser } = useDataUser();
-
-
-    // getFollowUser(username);
-    // getUnFollowUser(username);
+    const { username, image, bio, email } = dataUser;
+    const {getCurrentPosts, setPage} = usePagination();
 
     const showModalEditUser = () => {
         const modalEdit = document.getElementById('modalEdit');
         modalEdit.style.display = 'block';
+    }
+
+    const initialFormValues = {
+        image: image,
+        username: username,
+        bio: bio,
+        email: email,
+        password: ''
     }
    
     return (
@@ -44,31 +48,47 @@ export const Profile = () => {
                                 </div>
                             </div>
                             : <Spiner profileSpiner/>
-            }
-             <Tabs>
-                    <TabList>
-                        <Tab>My Posts</Tab>
-                        <Tab>Favorited Posts</Tab>
-                    </TabList>
+                        }
+                            <Tabs>
+                                    <TabList>
+                                        <Tab>My Posts</Tab>
+                                        <Tab>Favorited Posts</Tab>
+                                    </TabList>
 
-                    <TabPanel>
-                        {dataOneArticle.length
-                            ?
-                            dataOneArticle.map(value => <Posts key={uuidv4()} props={value}/>)
-                            :
-                            <div className={style.noArticles}>No articles are here yet...</div>
-                        }
-                    </TabPanel>
-                    <TabPanel>
-                        {dataFavoriteArticle.length
-                            ?
-                            dataFavoriteArticle.map(value => <Posts key={uuidv4()} props={value}/>)
-                            :
-                            <div className={style.noArticles}>No articles are here yet...</div>
-                        }
-                    </TabPanel>
-                </Tabs>
-            
+                                    <TabPanel>
+                                        {dataOneArticle.length
+                                            ?
+                                            <>
+                                            {getCurrentPosts(dataOneArticle).map(value => <Posts key={uuidv4()} props={value}/>)}
+                                            <>
+                                            {
+                                                dataOneArticle.length < 11 ? null : <Pagination articles={dataOneArticle} setPage={setPage}/>
+                                            }
+                                            </>
+                                            
+                                            </>
+                                            :
+                                            <div className={style.noArticles}>No articles are here yet...</div>
+                                        }
+                                    </TabPanel>
+                                    <TabPanel>
+                                        {dataFavoriteArticle.length
+                                            ?
+                                            <>
+                                            {getCurrentPosts(dataFavoriteArticle).map(value => <Posts key={uuidv4()} props={value}/>)}
+                                            <>
+                                            {
+                                                dataFavoriteArticle.length < 11 ? null : <Pagination articles={dataOneArticle} setPage={setPage}/>
+                                            }
+                                            </>
+                                            </>
+                                            :
+                                            <div className={style.noArticles}>No articles are here yet...</div>
+                                        }
+                                    </TabPanel>
+                                </Tabs>
+                                <EditUser initialValues={initialFormValues}/>
+                            
         </div>
     );
 };

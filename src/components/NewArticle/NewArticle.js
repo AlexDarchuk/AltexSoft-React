@@ -4,17 +4,17 @@ import { Field , withFormik} from 'formik';
 import { createArticle } from '../../api/articles';
 import { Icon, Button } from '../../shared-components';
 import { Spiner } from '../../components';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth, useDataArticle } from '../../hooks';
 import { NewArticleShema} from '../../validationShemas';
 
 const NewArticle = ( props ) => {
-    const { values, isValid } = props;
-    const { newArticle } = useAuth();
+    const { values, isValid, handleSubmit } = props;
+    const { newArticle, nameModalNewAticle, slugListComments } = useAuth();
+    const { getUpdateArticle } = useDataArticle();
     const [isSpinerBtn, setSpinerBtn ] = useState(false);
 
-    console.log(values);
-    const handleSubmit = (e) => {
-    e.preventDefault();
+
+    const handleOnSubmit = () => {
         createNewArticle({
             title: values.title,
             description: values.description,
@@ -22,15 +22,14 @@ const NewArticle = ( props ) => {
             tagList: values.tagList.split(' ')
         });
         setSpinerBtn(true);
+        handleSubmit()
     }
 
     const createNewArticle = async (obj) => {
-        console.log(obj);
         try {
-           const {article} = await createArticle(obj);
+           await createArticle(obj);
            
            newArticle();
-           console.log(article);
            setSpinerBtn(false);
         } catch(err) {
             console.error(err);
@@ -38,10 +37,23 @@ const NewArticle = ( props ) => {
         } 
     }
 
+    const articleUpdate = (slug,) => {
+        getUpdateArticle(slug, {
+            title: values.title,
+            description: values.description,
+            body: values.body,
+            tagList: values.tagList.split(' ')
+        });
+        handleSubmit();
+    }
+
+    
+
     const closeModal = () => {
         const modalArticle = document.getElementById('modalArticle');
         modalArticle.style.display = 'none';
     }
+
 
     return (
         <div id='modalArticle' className={style.modalArticle}>
@@ -49,8 +61,8 @@ const NewArticle = ( props ) => {
                 <Button btnClose onClick={closeModal}>
                     <Icon name="close" width={'17px'} color={'rgb(61, 72, 73)'}/>
                 </Button>
-                <h3 className={style.title}>New Article</h3>
-                <form className={style.form} onSubmit={handleSubmit}>
+                <h3 id='modalTitle' className={style.title}>{nameModalNewAticle}</h3>
+                <form className={style.form} >
                     <label className={style.input}>
                         Article title
                         <Field 
@@ -90,7 +102,12 @@ const NewArticle = ( props ) => {
                     </label>
                     <div>
                         {
-                            isSpinerBtn ? <Spiner newArticleSpiner/> : <Button type='submit' disabled={!isValid} btnCreateArticle={isValid}>Publish Article</Button>
+                            isSpinerBtn ? <Spiner newArticleSpiner/> : <>
+                                                                            {
+                                                                                nameModalNewAticle === 'New Article' ? <Button type='button' disabled={!isValid} btnCreateArticle={isValid} onClick={handleOnSubmit}>Publish Article</Button>
+                                                                                                                     : <Button type='button' disabled={!isValid} btnCreateArticle={isValid} onClick={() => articleUpdate(slugListComments)}>Update Article</Button>
+                                                                            }
+                                                                        </>
                         }
                     </div>
                 </form>

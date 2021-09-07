@@ -1,47 +1,140 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { Redirect } from 'react-router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { v4 as uuidv4 } from 'uuid';
-import {Title} from '../Layout';
-import { Main } from '../../pages';
 import style from './Body.module.css';
-import { Posts } from '../Posts';
-import { useAuth } from '../../hooks';
+import { useAuth, usePagination } from '../../hooks';
+import { articlesService } from '../../api/articles';
+import { Spiner, Pagination, Posts, TagList, Hero } from '../../components';
+
 
 export const Body = () => {
-    const {dataFollowUser, dataOneArticle, tagsList} = useAuth();
+    const { tagsList, nameAndCountTag, isNewArticle, isSignIn} = useAuth();
+    const [tag, setTag] = useState([]);
+    const [isLoading, setIsLoading] = useState(null);
+    const [article, setArticle] = useState([]);
+    const [feedArticle, setFeedArticle] = useState([]);
+    const [feedCount, setFeedCount] = useState(0);
+    const [isLoadingTeg, setIsLoadingTeg] = useState(null);
+    const [numberTag, setNumberTag] = useState(1);
+    const [loadingFeedArticle, setLoadingFeedArticle] = useState(false)
+    const {getCurrentPosts, setPage} = usePagination();
 
-    console.log(dataFollowUser);
+    const fetchTegs = async () => {
+        try {
+          setIsLoadingTeg(true)
+         const { tags } = await articlesService.getAllTags();
+    
+         setTag(tags);
+        } catch(err) {
+          console.error(err)
+          setLoadingFeedArticle(false)
+        } finally {
+          setIsLoadingTeg(false);
+        }
+     }
+
+     const fetchArticles = async () => {
+        try {
+         setIsLoading(true)
+         const { articles } = await articlesService.getAllArticles();
+         
+         setArticle(articles);
+        } catch(err) {
+          console.error(err)
+          setIsLoading(false)
+        } finally {
+          setIsLoading(false)
+        }
+     }
+
+     const feedArticles = async (feedCount) => {
+         try {
+             const { articles, articlesCount } = await articlesService.myFeedArticle(feedCount);
+
+             setLoadingFeedArticle(true);
+             setFeedArticle(articles);
+             setFeedCount(articlesCount);
+         } catch(err) {
+             console.error(err);
+             setLoadingFeedArticle(false);
+         }
+     }
+
+    useEffect(() => {
+        fetchTegs();
+        fetchArticles();
+    },[isNewArticle]);
+
+    useEffect(() => {
+        feedArticles(feedCount);
+    },[feedCount]);
 
     return (
-        <main className={style.body}>
-            <Title/>
-            <Tabs 
-                defaultIndex={1}
-                className={style.container}>
-                <TabList>
-                    <Tab>Your Feeds</Tab>
-                    <Tab default={0}>Global Feeds</Tab>
-                    <Tab>Tegs</Tab>
-                </TabList>
-
-                <TabPanel>
-                    {dataOneArticle.length ?
-                                            dataOneArticle.map(item => <Posts key={uuidv4()} props={item}/>)
-                                           :
-                                           <div className={style.noArticles}>No articles are here yet...</div>
-                    }
-                </TabPanel>
-                <TabPanel>
-                    <Main/>
-                </TabPanel>
-                <TabPanel>
-                    {tagsList.length ?
-                                        tagsList.map(item => <Posts key={uuidv4()} props={item}/>)
-                                    :
-                                        <div className={style.noArticles}>No articles are here yet...</div>
+        <div className={style.main}>
+            <Hero/>
+            <div className={style.bodyContainer}>
+            <main className={style.body}>
+                <Tabs 
+                    selectedIndex={numberTag}
+                    onSelect = {(index) => {
+                        setNumberTag(index)
+                    }} 
+                    className={style.container}>
+                    <TabList>
+                        <Tab>Your Feeds</Tab>
+                        <Tab>Global Feeds</Tab>
+                        {
+                            nameAndCountTag.name.tag ? <Tab>{'#' + nameAndCountTag.name.tag}</Tab> : null
                         }
-                </TabPanel>
-            </Tabs>
-        </main>
+                    </TabList>
+                    
+
+                    <TabPanel>
+                        { isSignIn ? 
+                            <> 
+                                {
+                                    !loadingFeedArticle ? 
+                                        <Spiner/> 
+                                            :
+                                                <> 
+                                                    {feedArticle ? getCurrentPosts(feedArticle).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                                    <Pagination articles={feedArticle} setPage={setPage}/>
+                                                </>
+                                            }
+                                        </>         
+                                    : <Redirect to='/login'/>
+                        }
+                    </TabPanel>
+                    <TabPanel>
+                        { isLoading ? 
+                            <Spiner /> 
+                                : 
+                                    <>
+                                        {article ? getCurrentPosts(article).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                        <Pagination articles={article} setPage={setPage}/>
+                                    </>
+                                }
+                        {/* <Main article={article} isLoading={isLoading}/> */}
+                    </TabPanel>
+                        { numberTag === 2 ? 
+                            <TabPanel>
+                                {!tagsList ?
+                                    <Spiner/> : 
+                                        <>
+                                            {tagsList ? getCurrentPosts(tagsList).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                            <Pagination articles={tagsList} setPage={setPage}/>
+                                        </>
+                                        }
+                                            
+                    </TabPanel>
+                    : null
+                    }
+                    
+                </Tabs>
+            </main>
+                <TagList items = {tag} isLoading={isLoadingTeg} chanhgIndex={setNumberTag}/>
+            </div>
+        </div>
     );
 };

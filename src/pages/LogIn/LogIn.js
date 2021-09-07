@@ -4,31 +4,31 @@ import { Link } from "react-router-dom";
 import style from './LogIn.module.css';
 import { Button } from '../../shared-components';
 import  { logInUser } from '../../api/articles';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth, useDataArticle } from '../../hooks';
 import { Spiner } from '../../components';
 import { LoginShema } from '../../validationShemas';
 import { ErrorMessage } from '../../errors';
 
 const LogIn = ( props ) => {
-    const { values, errors, isValid } = props;
-    const { signIn, signOut, getToken, getDataUser, } = useAuth();
+    const { values, isValid } = props;
+    const { signIn, signOut, getDataUser } = useAuth();
     const [isSpinerBtn, setSpinerBtn ] = useState(false);
+    const { getArticleFavorite, getArticleUser} = useDataArticle();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         registrationUser(values);
         setSpinerBtn(true);
-        console.log(errors);
     }
        
     const registrationUser = async (obj) => {
         try {
           const { user } = await logInUser(obj);
-          const { token } = user;
 
             signIn();
-            getToken(token);
             getDataUser(user);
+            getArticleUser(user.username)
+            getArticleFavorite(user.username)
             setSpinerBtn(false);
         } catch(err) {
             console.error(err)

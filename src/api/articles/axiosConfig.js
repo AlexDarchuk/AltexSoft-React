@@ -7,7 +7,7 @@ export const AXIOS = axios.create({
 export const AUTHINSTANS = axios.create({
     baseURL: 'https://conduit.productionready.io',
     headers: {
-        Authorization: `Token ${localStorage.getItem("token")}`
+        Authorization: `Token ${sessionStorage.getItem("token")}`
     }
 });
 

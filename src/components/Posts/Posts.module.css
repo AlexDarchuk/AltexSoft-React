@@ -23,7 +23,24 @@
 }
 
 .listTegs {
-    display: flex;
-    justify-content: flex-end;
+    text-align: end;
     list-style: none;
+}
+
+.tegsItem {
+    font-size: 12px;
+    display: inline-block;
+}
+
+.article {
+    border: 1px solid rgb(201, 196, 196);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-decoration: underline;
 }

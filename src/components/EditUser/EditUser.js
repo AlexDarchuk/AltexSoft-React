@@ -7,6 +7,14 @@ import { useAuth } from '../../hooks/useAuth';
 import { UpdateUserShema } from '../../validationShemas';
 import { ErrorMessage } from '../../errors';
 
+const DEFAULT_VALUES = {
+    image: "",
+    username: "",
+    bio: "",
+    email: "",
+    password: "",
+  };
+
 const EditUser = ( props ) => {
     const { values, isValid } = props;
     const modalArticle = document.getElementById('modalEdit');
@@ -107,5 +115,6 @@ const EditUser = ( props ) => {
 
 export default withFormik({
     validationSchema: UpdateUserShema,
-    mapPropsToValues: ({initialValues}) => initialValues
+    mapPropsToValues: ({initialValues}) => 
+        initialValues ? initialValues : DEFAULT_VALUES
 })(EditUser)

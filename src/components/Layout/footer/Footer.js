@@ -1,7 +1,8 @@
 import React from 'react';
+import { format } from 'date-fns'
 import { Link } from "react-router-dom";
 import style from './Footer.module.css';
-import Avatar from '../../../shared-components/avatar';
+import { Logo } from '../../../shared-components';
 
 export const Footer = () => {
     return (
@@ -9,10 +10,10 @@ export const Footer = () => {
                 <div className={style.container}>
                     <div className={style.copirate}>
                         <Link to='/'>
-                            <Avatar height={"20px"}/>
+                            <Logo height={"20px"}/>
                         </Link>
                         <p className={style.copirateText}>
-                            © 2021. An interactive learning project
+                            © {format(new Date(), 'yyyy')}. An interactive learning project
                         </p>
                     </div>
                     <div className={style.author}>
