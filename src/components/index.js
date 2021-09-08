@@ -1,6 +1,6 @@
 export * from './AddComment/AddComment';
 export * from './Article/Article';
-export * from './Body/Body';
+export * from './Body';
 export * from './DropDown/DropDown';
 export * from './EditUser/EditUser';
 export * from './Layout';
