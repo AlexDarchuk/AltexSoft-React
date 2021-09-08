@@ -49,7 +49,9 @@ export const Profile = () => {
                             </div>
                             : <Spiner profileSpiner/>
                         }
-                            <Tabs>
+                            <Tabs
+                            defaultIndex={0}
+                            >
                                     <TabList>
                                         <Tab>My Posts</Tab>
                                         <Tab>Favorited Posts</Tab>

@@ -17,8 +17,11 @@ export const Articles = () => {
                 }
             </>
             <>  
-                {
+                { <> { oneArticle.title ?
                     isSignIn ? <AddComment/> : <div className={style.commentLInk}><Link className={style.signUpLink} to="login"> Sign In</Link> or <Link className={style.signUpLink} to="register">Sign Up</Link> to add comments on this article.</div>
+                    : null
+                }
+                    </>
                 }
             </>
         </main>

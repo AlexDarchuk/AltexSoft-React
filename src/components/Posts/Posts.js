@@ -10,7 +10,7 @@ import {useAuth, useDataArticle, useDataUser} from '../../hooks';
 export const Posts = ({ props } ) => {
     const {author: {image, username}, createdAt, title, slug, description, favoritesCount, tagList} = props;
     const [countFavorites, setCountFavorites] = useState(favoritesCount);
-    const { isSignIn, getSlugListComments, getUserName } = useAuth();
+    const { isSignIn, getSlugListComments, getUserName, loadUserProfile } = useAuth();
     const history = useHistory();
     const { getArticleFavorite, getArticleUser, getFavoriteArticle, getOneArticle} = useDataArticle();
     const { getProfileUser } = useDataUser();
@@ -26,7 +26,8 @@ export const Posts = ({ props } ) => {
         getProfileUser(name);
         getArticleUser(name);
         getArticleFavorite(name);
-        getUserName(name)
+        getUserName(name);
+        loadUserProfile(false);
         history.push(`/profiles/${name}`);
     }
 
@@ -52,7 +53,7 @@ export const Posts = ({ props } ) => {
                         </div>
                     </div>
                 </div>
-                <Button onClick={() => isSignIn ? countPlus(slug) : infoToast()}>
+                <Button onClick={() => isSignIn ? countPlus(slug) : infoToast("Authentication required. Please Login")}>
                     <Icon name="heart" width={'14px'} color={'#ab570e'}/>
                     {countFavorites}
                 </Button>

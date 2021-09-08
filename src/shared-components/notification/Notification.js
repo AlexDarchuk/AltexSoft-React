@@ -2,8 +2,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Notification.css'
 
-export const infoToast = () => {
-    toast("Authentication required. Please Login", {
+export const infoToast = (text) => {
+    toast(text, {
         className: 'test-toast',
         autoClose: 7000,
         hideProgressBar: false,

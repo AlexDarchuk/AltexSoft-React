@@ -2,7 +2,7 @@ import { articlesService } from '../api/articles';
 import { useAuth } from './useAuth';
 
 export const useDataArticle = () => {
-    const { getDataArticleUser, getDataFavoriteArticle, getListTags, getDataSingleArticle, changeValueComment,deleteArticleFlag } = useAuth();
+    const { getDataArticleUser, getDataFavoriteArticle, getListTags, getDataSingleArticle, loadingTags, changeValueComment,deleteArticleFlag } = useAuth();
 
     const getArticleUser = async (name) => {
         try {
@@ -84,9 +84,11 @@ export const useDataArticle = () => {
         try {
             const { articles } = await articlesService.listTags(tag);
 
-            getListTags(articles)
+            getListTags(articles);
+            loadingTags(true)
         }catch(err) {
-            console.error(err)
+            console.error(err);
+            loadingTags(false);
         }
     }
 

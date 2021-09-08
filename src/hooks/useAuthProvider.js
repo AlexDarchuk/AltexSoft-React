@@ -6,6 +6,7 @@ export const useAuthProvider = () => {
     const [ isUpdateUser, setUpdateUser] = useState(true);
     const [dataUser, setDataUser] = useState([]);
     const [dataProfile, setDataProfile] = useState([]);
+    const [isDataProfileLoading, setDataProfileLoading] = useState(false);
     const [dataOneArticle, setDataOneArticle] = useState([]);
     const [dataFavoriteArticle, setDataFavoriteArticle] = useState([]);
     const [dataFollowUser, setDataFollowUser] = useState([]);
@@ -18,6 +19,7 @@ export const useAuthProvider = () => {
     const [nameModalNewAticle, setNameModalNewArticle] = useState('');
     const [followingUser, setFollowingUser] = useState(null);
     const [createdNewComment, setCreatedNewComment] = useState(false);
+    const [isTagsLOading, setTegsLOading] = useState(false);
     const [isDeleteArticle, setIsDeleteArticle] = useState(false);
     const [nameAndCountTag, setNameAndCountTAg] = useState({name: '', indexTag: null});
     
@@ -31,8 +33,16 @@ export const useAuthProvider = () => {
         setSignIn(false)
     }
 
+    const loadUserProfile = (point) => {
+        setDataProfileLoading(point);
+    }
+
     const newArticle = () => {
         setNewArticle(true)
+    }
+
+    const loadingTags = (point) => {
+        setTegsLOading(point)
     }
 
     const updateUser = (point) => {
@@ -133,8 +143,14 @@ export const useAuthProvider = () => {
         getSlugListComments,
         slugListComments,
 
+        loadUserProfile,
+        isDataProfileLoading,
+
         deleteArticleFlag,
         isDeleteArticle,
+
+        loadingTags,
+        isTagsLOading,
 
         getNameModalNewArticle,
         nameModalNewAticle,

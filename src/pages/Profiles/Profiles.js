@@ -9,7 +9,7 @@ import { Image, Button } from '../../shared-components';
 import { Posts, Spiner, Pagination } from '../../components';
 
 export const Profiles = () => {
-    const { dataProfile, dataOneArticle, dataUser, dataFavoriteArticle, isSignIn, followingUser } = useAuth();
+    const { dataProfile, dataOneArticle, dataUser, dataFavoriteArticle, isSignIn, followingUser, isDataProfileLoading } = useAuth();
     const { image, bio, username } =dataProfile;
     const { getFollowUser, getUnFollowUser } = useDataUser();
     const {getCurrentPosts, setPage} = usePagination();
@@ -25,7 +25,7 @@ export const Profiles = () => {
     return (
         <div className={style.profile}>
             {
-                dataProfile ? <div className={style.profileBox}>
+                isDataProfileLoading ? <div className={style.profileBox}>
                 <div className={style.profileChange}>
                     <div className={style.imageBlock}>
                         {
@@ -64,16 +64,21 @@ export const Profiles = () => {
                 </div>
             </div>
             : <Spiner/>
+            
             }
             
             <div className={style.profilesTabs}>
-                <Tabs>
+                <Tabs
+                defaultIndex={0}
+                >
                     <TabList>
                         <Tab>My Posts</Tab>
                         <Tab>Favorited Posts</Tab>
                     </TabList>
 
                     <TabPanel>
+                        {isDataProfileLoading ?
+                        <>
                         {dataOneArticle.length
                             ?
                             <>
@@ -88,8 +93,13 @@ export const Profiles = () => {
                             :
                             <div className={style.noArticles}>No articles are here yet...</div>
                         }
+                        </>
+                        : <div className={style.noArticles}>No articles are here yet...</div>
+                    }
                     </TabPanel>
                     <TabPanel>
+                    {isDataProfileLoading ?
+                        <>
                         {dataFavoriteArticle.length
                             ?
                             <>
@@ -103,6 +113,9 @@ export const Profiles = () => {
                             :
                             <div className={style.noArticles}>No articles are here yet...</div>
                         }
+                        </>
+                        : <div className={style.noArticles}>No articles are here yet...</div>
+                    }
                     </TabPanel>
                 </Tabs>
             </div>

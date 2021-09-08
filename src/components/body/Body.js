@@ -9,7 +9,7 @@ import { Spiner, Pagination, Posts, TagList, Hero } from '../../components';
 
 
 export const Body = () => {
-    const { tagsList, nameAndCountTag, isNewArticle, isSignIn} = useAuth();
+    const { tagsList, nameAndCountTag, isNewArticle, isSignIn, isTagsLOading} = useAuth();
     const [tag, setTag] = useState([]);
     const [isLoading, setIsLoading] = useState(null);
     const [article, setArticle] = useState([]);
@@ -67,8 +67,10 @@ export const Body = () => {
     },[isNewArticle]);
 
     useEffect(() => {
-        feedArticles(feedCount);
-    },[feedCount]);
+        if(isSignIn){
+            feedArticles(feedCount);
+        }  
+    },[feedCount, isSignIn]);
 
     return (
         <div className={style.main}>
@@ -98,7 +100,7 @@ export const Body = () => {
                                         <Spiner/> 
                                             :
                                                 <> 
-                                                    {feedArticle ? getCurrentPosts(feedArticle).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                                    {feedArticle.length ? getCurrentPosts(feedArticle).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
                                                     <Pagination articles={feedArticle} setPage={setPage}/>
                                                 </>
                                             }
@@ -111,18 +113,17 @@ export const Body = () => {
                             <Spiner /> 
                                 : 
                                     <>
-                                        {article ? getCurrentPosts(article).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                        {article.length ? getCurrentPosts(article).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
                                         <Pagination articles={article} setPage={setPage}/>
                                     </>
                                 }
-                        {/* <Main article={article} isLoading={isLoading}/> */}
                     </TabPanel>
                         { numberTag === 2 ? 
                             <TabPanel>
-                                {!tagsList ?
+                                {!isTagsLOading ?
                                     <Spiner/> : 
                                         <>
-                                            {tagsList ? getCurrentPosts(tagsList).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
+                                            {tagsList.length ? getCurrentPosts(tagsList).map(item => <Posts key={uuidv4()} props={item}/>) : <div className={style.noArticles}>No articles are here yet...</div>}
                                             <Pagination articles={tagsList} setPage={setPage}/>
                                         </>
                                         }

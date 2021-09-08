@@ -3,7 +3,7 @@ import { useAuth } from './useAuth';
 import { useDataArticle } from './useDataArticle';
 
 export const useDataUser = () => {
-    const { getUserFollow, changeFollowingBtn, getDataProfileUser } = useAuth();
+    const { getUserFollow, changeFollowingBtn, getDataProfileUser, loadUserProfile } = useAuth();
     const { getArticleUser } = useDataArticle();
 
     const getFollowUser = async (username) => {
@@ -38,8 +38,10 @@ export const useDataUser = () => {
 
             getDataProfileUser(profile);
             changeFollowingBtn(profile.following)
+            loadUserProfile(true);
         } catch(err) {
             console.error(err);
+            loadUserProfile(false);
         }
     }
 
