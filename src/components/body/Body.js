@@ -8,7 +8,7 @@ import { articlesService } from '../../api/articles';
 import { Spiner, Pagination, Posts, TagList, Hero } from '../../components';
 
 
-export const Body = () => {
+const Body = () => {
     const { tagsList, nameAndCountTag, isNewArticle, isSignIn, isTagsLOading} = useAuth();
     const [tag, setTag] = useState([]);
     const [isLoading, setIsLoading] = useState(null);
@@ -139,3 +139,5 @@ export const Body = () => {
         </div>
     );
 };
+
+export default Body;
