@@ -1,189 +1,215 @@
 .button {
-    display: flex;
-    align-items: center;
-    border: none;
-    font-family: 'Neucha', cursive;
-    background: none;
-    font-weight: bold;
-    border: 1px solid #ab570e;
-    padding: 5px;
-    border-radius: 5px;
-    color: #ab570e;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+
+	padding: 5px;
+
+	cursor: pointer;
+
+	color: #AB570E;
+	border: none;
+	border: 1px solid #AB570E;
+	border-radius: 5px;
+	background: none;
+
+	font-family: 'Neucha', cursive;
+	font-weight: bold;
 }
 
 .button[data-btn-img='true'] {
-    width: 40px;
-    height: 40px;
-    border: none;
+	width: 40px;
+	height: 40px;
+
+	border: none;
 }
 
 .button[data-btn-name='true'] {
-    border: none;
+	border: none;
 }
 
 .button[data-btn-more='true'] {
-    color: blue;
-    border: none;
+	color: blue;
+	border: none;
 }
 
 .button[data-tegs-btn='true'] {
+	margin: 0 10px 10px 0;
 
-    margin: 0px 10px 10px 0px;
-    border: 1px solid #ab570e;
+	border: 1px solid #AB570E;
 }
 
 .button[data-edit-profile='true'] {
-    margin-right: 10px;
-    justify-content: center;
-    padding: 5px 30px;
+	justify-content: center;
+
+	margin-right: 10px;
+	padding: 5px 30px;
 }
 
 .button[data-tegs-btn='true']:hover,
 .button[data-edit-profile='true']:hover {
-    background: #ab570e;
-    color: #fff;
+	color: #FFF;
+	background: #AB570E;
 }
 
 .button[data-show-tegs] {
-    border: none;
-    color: blue;
+	color: blue;
+	border: none;
 }
 
 .button[data-login-btn='true'] {
-    width: 40px;
-    height: 40px;
-    justify-content: center;
-    border-radius: 50px;
-    background: #d4d4d4;
-    padding: 0px;
-    border: rgb(61, 72, 73);
+	justify-content: center;
+
+	width: 40px;
+	height: 40px;
+	padding: 0;
+
+	border: rgb(61, 72, 73);
+	border-radius: 50px;
+	background: #D4D4D4;
 }
 
 .button[data-log-in='true'],
 .button[data-sign-up='true'] {
-    justify-content: center;
+	justify-content: center;
+
 	width: 100%;
-	border: #fbfbfb solid 4px;
-	cursor:pointer;
-	background-color: #351d08;
-	color:white;
-	font-size:24px;
-	padding-top:22px;
-	padding-bottom:22px;
+	margin-top: 10px;
+	padding-top: 22px;
+	padding-bottom: 22px;
+
+	cursor: pointer;
 	transition: all 0.3s;
-    margin-top: 10px;
-    font-weight:700;
+
+	color: white;
+	border: #FBFBFB solid 4px;
+	background-color: #351D08;
+
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .button[data-log-in='false'],
 .button[data-sign-up='false'] {
-    justify-content: center;
+	justify-content: center;
+
 	width: 100%;
-	border: #fbfbfb solid 4px;
-	cursor:pointer;
-	color:#fff;
-	font-size:24px;
-	padding-top:22px;
-	padding-bottom:22px;
+	margin-top: 10px;
+	padding-top: 22px;
+	padding-bottom: 22px;
+
+	cursor: pointer;
 	transition: all 0.3s;
-    margin-top: 10px;
-    font-weight:700;
-    background-color:rgb(245, 50, 50)
+
+	color: #FFF;
+	border: #FBFBFB solid 4px;
+	background-color: rgb(245, 50, 50);
+
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .button[data-create-article="false"] {
-    justify-content: center;
-    width: 100%;
-    height: 45px;
-    cursor:pointer;
-	background-color: rgb(245, 50, 50);
-	color:#fff;
-    margin-top: 30px;
-}
+	justify-content: center;
 
+	width: 100%;
+	height: 45px;
+	margin-top: 30px;
+
+	cursor: pointer;
+
+	color: #FFF;
+	background-color: rgb(245, 50, 50);
+}
 
 .button[data-create-article='true'] {
-    justify-content: center;
-    width: 100%;
-    height: 45px;
-    cursor:pointer;
-	background-color: #351d08;
-	color:#fff;
-    margin-top: 30px;
+	justify-content: center;
+
+	width: 100%;
+	height: 45px;
+	margin-top: 30px;
+
+	cursor: pointer;
+
+	color: #FFF;
+	background-color: #351D08;
 }
 
-
-
 .button[data-drop-btn='true'] {
-    width: 100%;
-    display: block;
-    text-align: center;
+	display: block;
+
+	width: 100%;
+
+	text-align: center;
 }
 
 .button[data-drop-out-btn='true'] {
-    width: 100%;
-    display: block;
-    text-align: center;
-    border: none;
-    background: tomato;
-    color: #fff;
+	display: block;
+
+	width: 100%;
+
+	text-align: center;
+
+	color: #FFF;
+	border: none;
+	background: tomato;
 }
 
 .button[data-drop-out-btn='true']:hover {
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
-
+.button[data-comment-btn='true'] {
+	width: max-content;
+	margin: 20px 0 20px auto;
+}
 
 .button[data-drop-btn='true']:hover,
 .button[data-comment-btn='true']:hover {
-    background: #ab570e;
-    color: #fff;
+	color: #FFF;
+	background: #AB570E;
 }
 
 .button[data-log-in]:hover,
 .button[data-sign-up]:hover,
 .button[data-create-article='true']:hover {
-    background-color: #fff;
-	color: #351d08;
+	color: #351D08;
+	background-color: #FFF;
 }
+
 .button[data-log-in='false']:hover,
 .button[data-sign-up='false']:hover,
 .button[data-create-article="false"]:hover {
-    background-color:rgb(245, 50, 50);
-    color:#fff;
+	color: #FFF;
+	background-color: rgb(245, 50, 50);
 }
 
 .button[data-close-btn='true'] {
-    border: none;
-    margin: 0 0 0 auto;
-}
+	margin: 0 0 0 auto;
 
-.button[data-comment-btn='true'] {
-    width: max-content;
-    margin: 20px 0 20px auto; 
+	border: none;
 }
 
 .button[data-comment-btn='false'] {
-    background-color:rgb(245, 50, 50);
-    color:#fff;
-    width: max-content;
-    margin: 20px 0 20px auto; 
+	width: max-content;
+	margin: 20px 0 20px auto;
+
+	color: #FFF;
+	background-color: rgb(245, 50, 50);
 }
 
 .button[data-delete-comment='true'] {
-    background-color:rgb(245, 50, 50);
-    color:#fff;
+	color: #FFF;
+	background-color: rgb(245, 50, 50);
 }
 
 .button[data-edit-article='true'] {
-    margin-right: 5px;
-    background-color: #fff;
-    color: #ab570e;
-}
-.button[data-edit-article='true']:hover {
-    color: #fff;
-    background-color: #ab570e;
+	margin-right: 5px;
+
+	color: #AB570E;
+	background-color: #FFF;
 }
 
+.button[data-edit-article='true']:hover {
+	color: #FFF;
+	background-color: #AB570E;
+}

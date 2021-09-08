@@ -1,19 +1,27 @@
 .tegs {
-    width: 250px;
-    padding: 10px;
-    margin-left: 20px;
-    height: auto;
-    box-shadow: rgb(203 211 212 / 50%) 0px 2px 12px 0px;
+	width: 100%;
+	height: auto;
+	margin-left: 20px;
+	padding: 10px;
+
+	box-shadow: rgb(203 211 212 / 50%) 0 2px 12px 0;
 }
 
 .title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 10px;
+	margin-bottom: 10px;
+
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .tegBox {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+@media screen and (max-width: 425px) {
+	.tegs {
+		margin: 0;
+	}
 }

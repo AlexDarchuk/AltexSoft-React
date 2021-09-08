@@ -17,7 +17,7 @@ function App() {
               <Route path="/" exact>
                 <Body/>
               </Route>
-              <Route path="/login">
+              <Route path="/login" exact>
                 <LogIn/>
               </Route>
               <Route path="/register">

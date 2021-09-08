@@ -1,26 +1,37 @@
 .articleMain {
-    width: 1170px;
-    margin: 0px auto;
-    display: flex;
-    flex: 1 1;
-    flex-direction: column;
-    padding: 20px 0;
+	display: flex;
+	flex: 1 1;
+	flex-direction: column;
+
+	max-width: 1170px;
+	margin: 0 auto;
+	padding: 20px 15px;
 }
 
 .commentLInk {
-    padding: 20px 20px 40px 20px;
-    width: 100%;
-    min-height: 50px;
-    box-shadow: rgb(203 211 212 / 50%) 0px 2px 12px 0px;
-    border-radius: 5px;
-    margin: 15px 0;
-    text-align: center;
+	width: 100%;
+	min-height: 50px;
+	margin: 15px 0;
+	padding: 20px 20px 40px 20px;
+
+	text-align: center;
+
+	border-radius: 5px;
+	box-shadow: rgb(203 211 212 / 50%) 0 2px 12px 0;
 }
+
 .signUpLink {
-    text-decoration: none;
-    color: rgb(245, 50, 50);
+	text-decoration: none;
+
+	color: rgb(245, 50, 50);
 }
 
 .signUpLink:hover {
-    text-decoration: underline;
+	text-decoration: underline;
+}
+
+@media screen and (max-width: 425px) {
+	.articleMain {
+		margin: 0;
+	}
 }

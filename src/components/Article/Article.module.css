@@ -1,38 +1,60 @@
 .articleBlock {
-    padding: 20px;
-    width: 100%;
-    box-shadow: rgb(203 211 212 / 50%) 0px 2px 12px 0px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+	width: 100%;
+	margin-bottom: 15px;
+	padding: 20px;
+
+	border-radius: 5px;
+	box-shadow: rgb(203 211 212 / 50%) 0 2px 12px 0;
 }
+
 .userInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 
 .name {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+
+	margin-bottom: 15px;
 }
 
 .created {
-    margin-left: 20px;
+	margin-left: 20px;
 }
+
 .article {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .tegsItem {
-    font-size: 12px;
-    display: inline-block;
+	display: inline-block;
+
+	font-size: 12px;
 }
 
-.listTegs{
-    text-align: end;
+.listTegs {
+	text-align: end;
 }
 
-.editAndDeleteBtn{
-    display: flex;
+.editAndDeleteBtn {
+	display: flex;
+}
+
+@media screen and (max-width: 425px) {
+	.userInfo {
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.name {
+		align-self: flex-start;
+	}
+
+	.editAndDeleteBtn {
+		align-self: flex-end;
+
+		margin-bottom: 10px;
+	}
 }

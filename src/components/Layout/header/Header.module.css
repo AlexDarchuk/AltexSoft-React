@@ -1,56 +1,82 @@
 .header {
-    width: 100%;
-    background: #351d08;
+	width: 100%;
+
+	background: #351D08;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1170px;
-    margin: 0 auto;
-    padding: 15px 0;
+.headerContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	max-width: 1170px;
+	margin: 0 auto;
+	padding: 15px 15px;
 }
 
 .menu {
-    list-style: none;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+
+	list-style: none;
 }
 
 .menuList {
-    padding: 10px 15px;
+	padding: 10px 15px;
 }
 
 .menuLink {
-    font-weight: bold;
-    color:rgb(243, 235, 235);
-    opacity: 0.6;
-    text-decoration: none;
+	text-decoration: none;
+
+	opacity: 0.6;
+	color: rgb(243, 235, 235);
+
+	font-weight: bold;
 }
+
 .link {
-    font-weight: normal;
-    text-decoration: none;
-    color: #828080;
+	text-decoration: none;
+
+	color: #828080;
+
+	font-weight: normal;
 }
 
 .link:hover {
-    color: #fff;
+	color: #FFF;
 }
 
 .active {
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
+	text-decoration: none;
+
+	color: #FFF;
+
+	font-weight: bold;
 }
 
-.loginBlock{
-    position: relative;
-    display: flex;
-    align-items: center;
+.loginBlock {
+	position: relative;
+
+	display: flex;
+	align-items: center;
 }
 
 .userName {
-    margin-left: 5px;
-    color: #fff;
+	margin-left: 5px;
+
+	color: #FFF;
+}
+
+@media screen and (max-width: 425px) {
+	.headerContainer {
+		flex-direction: column;
+	}
+
+	.navMenu {
+		width: 100%;
+	}
+
+	.menu {
+		justify-content: space-evenly;
+	}
 }

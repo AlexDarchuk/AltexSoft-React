@@ -1,36 +1,42 @@
 .dropDown {
-    position: absolute;
-    top: calc(100% + 5px);
-    right: calc(100% - 30px);
-    min-width: 200px;
-    padding: 10px;
-    background: #fff;
-    text-align: center;
-    border-radius: 5px;
-    z-index: 100;
+	position: absolute;
+	z-index: 100;
+	top: calc(100% + 5px);
+	right: calc(100% - 30px);
+
+	min-width: 200px;
+	padding: 10px;
+
+	text-align: center;
+
+	border-radius: 5px;
+	background: #FFF;
 }
 
 .dropList {
-    list-style: none;
+	list-style: none;
 }
 
 .dropItem:nth-child(2) {
-    margin: 10px 0;
+	margin: 10px 0;
 }
-    
+
 .active {
-    display: block;
+	display: block;
 }
-.hide{
-    display: none;
+
+.hide {
+	display: none;
 }
 
 .profileLink {
-    color: #ab570e;
-    text-decoration: none;
-    padding: 5px 60px;
+	padding: 5px 60px;
+
+	text-decoration: none;
+
+	color: #AB570E;
 }
 
 .profileLink:hover {
-    color: #fff;
+	color: #FFF;
 }

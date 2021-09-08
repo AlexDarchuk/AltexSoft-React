@@ -1,4 +1,13 @@
 .tegList {
-    width: 20%;
-    margin-left: 20px;
+	width: 100%;
+	max-width: 250px;
+	margin-left: 20px;
+}
+
+@media screen and (max-width: 425px) {
+	.tegList {
+		width: 100%;
+		max-width: 100%;
+		margin: 0 0 15px 0;
+	}
 }

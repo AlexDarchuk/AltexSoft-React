@@ -34,7 +34,6 @@ class ArticlesService {
         try {
             const { data } = await AXIOS.get(`/api/articles/${slug}`);
 
-            console.log(data);
             return data;
         }catch(err) {
             console.error(err)

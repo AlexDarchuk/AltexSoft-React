@@ -10,7 +10,7 @@ export const Pagination = ({ articles, setPage}) => {
 
     return (
         <ReactPaginate
-        previousLabel={'Previos'}
+        previousLabel={'Prev'}
         nextLabel={'Next'}
         pageCount={pageCount}
         onPageChange={setPage}

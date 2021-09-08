@@ -9,7 +9,7 @@ import { Image, Button } from '../../shared-components';
 import { Posts, Spiner, Pagination } from '../../components';
 
 export const Profiles = () => {
-    const { dataProfile, dataOneArticle, dataFavoriteArticle, isSignIn, followingUser } = useAuth();
+    const { dataProfile, dataOneArticle, dataUser, dataFavoriteArticle, isSignIn, followingUser } = useAuth();
     const { image, bio, username } =dataProfile;
     const { getFollowUser, getUnFollowUser } = useDataUser();
     const {getCurrentPosts, setPage} = usePagination();
@@ -35,10 +35,20 @@ export const Profiles = () => {
                     </div>
                         <div className={style.followBtn}>
                             {
-                                isSignIn ?<>
+                                isSignIn ? <>
                                             {
-                                                followingUser ? <Button btnEditProfile onClick={()=> userNameUnForFollow(username)}>UnFollow</Button>
-                                                          : <Button btnEditProfile onClick={()=> userNameForFollow(username)}>Follow</Button>
+                                                <>
+                                                {
+                                                    dataUser.username === username ? null
+                                                    : <>{
+                                                        
+                                                        followingUser ? <Button btnEditProfile onClick={()=> userNameUnForFollow(username)}>UnFollow</Button>
+                                                        : <Button btnEditProfile onClick={()=> userNameForFollow(username)}>Follow</Button>
+                                                        }
+                                                    </>
+                                                }
+                                                
+                                                </>   
                                             }
                                           </>
                                         : null

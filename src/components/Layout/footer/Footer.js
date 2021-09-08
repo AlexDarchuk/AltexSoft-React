@@ -7,7 +7,7 @@ import { Logo } from '../../../shared-components';
 export const Footer = () => {
     return (
             <footer className={style.footer}>
-                <div className={style.container}>
+                <div className={style.footerContainer}>
                     <div className={style.copirate}>
                         <Link to='/'>
                             <Logo height={"20px"}/>

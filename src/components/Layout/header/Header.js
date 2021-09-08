@@ -17,7 +17,7 @@ export const Header = () => {
 
     return (
             <header className={style.header}>
-                <div className={style.container}>
+                <div className={style.headerContainer}>
                     <Link to='/'>
                         <Logo height={"40px"}/>
                     </Link>
