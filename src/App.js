@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import style from './App.module.css';
 import { ToastContainer } from 'react-toastify';
 import { Layout } from './components';
-import Body from './src/components/Body/Body';
+import Body from './components/Body/Body';
 import { Profile, Profiles, Articles} from './pages';
 import LogIn from './pages/LogIn/LogIn';
 import SignUp from './pages/SignUp/SignUp';
